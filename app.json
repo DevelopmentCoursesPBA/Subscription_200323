@@ -1,0 +1,33 @@
+{
+  "id": "c7f26ce4-0989-4079-b761-1f02f65c9ac7",
+  "name": "Subscription",
+  "publisher": "Housing Course",
+  "version": "21.0.0.0",
+  "brief": "Subscription ",
+  "description": "Housing Course",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "./Images/Logo.jpg",
+  "dependencies": [],
+  "screenshots": [],
+  "platform": "1.0.0.0",
+  "application": "21.0.0.0",
+  "idRanges": [
+    {
+      "from": 50100,
+      "to": 50149
+    }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": true,
+    "includeSourceInSymbolFile": true
+  },
+  "runtime": "10.0",
+  "features": [
+    "NoImplicitWith",
+    "TranslationFile"
+  ]
+}
