@@ -29,12 +29,18 @@ report 50100 "CSD Create Invoices"
                 SalesHeader: Record "Sales Header";
                 SalesLine: Record "Sales Line";
                 NextLineNo: Integer;
+                StartingDate: Date;
+                EndingDate: date;
+                Subscription: Record "CSD Subscription";
+                CoverPeriodTxt: Label 'Subscription covering the period %1 to %2';
             begin
                 //Test if the invoice has already been made
                 SalesLine.Reset();
+                SalesLine.SetRange("Document Type", SalesLine."Document Type"::Invoice);
                 SalesLine.SetRange("Sell-to Customer No.", CustSubscription."Customer No.");
-                SalesLine.SetRange(Type, SalesLine.Type);
+                SalesLine.SetRange(Type, SalesLine.Type::Item);
                 SalesLine.SetRange("No.", CustSubscription."Item No.");
+                SalesLine.SetRange("Posting Date", CustSubscription."Next Invoice Date");
                 if not SalesLine.IsEmpty() then
                     CurrReport.Skip();
 
@@ -67,6 +73,19 @@ report 50100 "CSD Create Invoices"
                 SalesLine.Validate(Quantity, 1);
                 SalesLine.Validate("Allow Line Disc.", CustSubscription."Allow Line Discount");
                 SalesLine.Validate("Unit Price", CustSubscription."Invoicing Price");
+                SalesLine.Modify();
+                SalesLine.Init();
+                SalesLine."Document Type" := SalesHeader."Document Type";
+                SalesLine."Document No." := SalesHeader."No.";
+                NextLineNo += 10000;
+                SalesLine."Line No." := NextLineNo;
+                SalesLine.Validate("Sell-to Customer No.", CustSubscription."Customer No.");
+                SalesLine.Insert(true);
+                SalesLine.Type := SalesLine.Type::" ";
+                Subscription.Get(CustSubscription."Subscription Code");
+                StartingDate := CalcDate('<+1D>', CustSubscription."Next Invoice Date");
+                EndingDate := CalcDate(Subscription."Invoicing Frequency", "Next Invoice Date") - 1;
+                SalesLine.Description := StrSubstNo(CoverPeriodTxt, StartingDate, EndingDate);
                 SalesLine.Modify();
             end;
 
