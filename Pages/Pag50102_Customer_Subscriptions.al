@@ -1,6 +1,6 @@
-page 50102 "CSD Customer Sucscriptions"
+page 50102 "CSD Customer Subscriptions"
 {
-    Caption = 'Customer Sucscriptions';
+    Caption = 'Customer Subscriptions';
     PageType = List;
     SourceTable = "CSD Customer Subscription";
 
@@ -10,7 +10,8 @@ page 50102 "CSD Customer Sucscriptions"
         {
             repeater(GroupName)
             {
-                field("Customer No.";Rec."Customer No.")
+                Caption = 'Subscriptions';
+                field("Customer No."; Rec."Customer No.")
                 {
                     ApplicationArea = All;
                     Visible = ShowCustomerNo;

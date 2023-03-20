@@ -25,7 +25,7 @@ pageextension 50103 "CSD Item Card" extends "Item Card"
             action(Subscriptions)
             {
                 Caption = 'Subscription';
-                RunObject = page "CSD Subscription Factbox";
+                RunObject = page "CSD Customer Subscriptions";
                 RunPageLink = "Item No." = field("No.");
                 ApplicationArea = All;
                 Image = InsuranceRegisters;

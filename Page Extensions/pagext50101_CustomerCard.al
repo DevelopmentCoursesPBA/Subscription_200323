@@ -25,7 +25,7 @@ pageextension 50100 "CSD Customer Card" extends "Customer Card"
             action(Subscriptions)
             {
                 Caption = 'Subscription';
-                RunObject = page "CSD Subscription Factbox";
+                RunObject = page "CSD Customer Subscriptions";
                 RunPageLink = "Customer No." = field("No.");
                 ApplicationArea = All;
                 Image = InsuranceRegisters;

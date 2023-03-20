@@ -1,6 +1,6 @@
 page 50103 "CSD Subscription Factbox"
 {
-    PageType = CardPart;
+    PageType = ListPart;
     SourceTable = "CSD Customer Subscription";
     Caption = 'Customer Subscription';
     Editable = false;
@@ -9,7 +9,7 @@ page 50103 "CSD Subscription Factbox"
     {
         area(Content)
         {
-            group(GroupName)
+            Repeater(GroupName)
             {
                 field("Subscription Code"; Rec."Subscription Code")
                 {
@@ -18,12 +18,12 @@ page 50103 "CSD Subscription Factbox"
                 field("Item No."; Rec."Item No.")
                 {
                     ApplicationArea = All;
-                    Visible=ShowItemField;
+                    Enabled = ShowItemField;
                 }
                 field("Customer No."; Rec."Customer No.")
                 {
                     ApplicationArea = All;
-                    Visible=ShowCustomerField;
+                    Enabled = ShowCustomerField;
                 }
                 field("Cancelled Date"; Rec."Cancelled Date")
                 {
@@ -32,12 +32,12 @@ page 50103 "CSD Subscription Factbox"
             }
         }
 
-}
+    }
 
-        trigger OnOpenPage()
+    trigger OnOpenPage()
     begin
-        ShowItemField := Rec.GetFilter("Customer No.")<>'';
-        ShowCustomerField := Rec.GetFilter("Item No.")<>'';
+        ShowItemField := Rec.GetFilter("Customer No.") <> '';
+        ShowCustomerField := Rec.GetFilter("Item No.") <> '';
     end;
 
     var
